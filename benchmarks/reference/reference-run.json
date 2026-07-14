@@ -1,0 +1,17 @@
+{
+  "alert_loss_rate": 0.2051,
+  "detection_rate": 0.9,
+  "deterministic": true,
+  "elapsed_seconds": 0.0247,
+  "experiments": 10,
+  "ground_truth_verified": true,
+  "iterations": 200,
+  "latency_pass_p50_ms": 0.1079,
+  "latency_pass_p95_ms": 0.1155,
+  "matched": 10,
+  "mean_time_to_detect_ticks": 1.4444,
+  "report_hash": "bf1df7b6ea4a9d659f851fe2b5c8b138450d852d3e3f9c083a4494482522434e",
+  "resilience_rate": 0.6,
+  "source_revision": "reference",
+  "source_tree_state": "clean-checkout"
+}
