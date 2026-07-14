@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Security Chaos Engineer</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Security Chaos Engineer</h1>
+      <p id="subtitle">Inject security faults; measure detection, response, and graceful degradation.</p>
+    </header>
+
+    <main>
+      <section class="panel">
+        <h2>Resilience scorecard</h2>
+        <div id="scorecard" class="cards"></div>
+        <div id="findings"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Experiments</h2>
+        <p class="hint">Run an experiment to inject its fault and see the verdict and detections.</p>
+        <div id="experiments" class="experiment-list"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Experiment detail</h2>
+        <div id="detail"><p class="hint">Select an experiment above.</p></div>
+      </section>
+    </main>
+
+    <footer>
+      <span id="system-meta"></span>
+      <a href="/docs">OpenAPI</a>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

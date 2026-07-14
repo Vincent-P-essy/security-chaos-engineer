@@ -1,0 +1,12 @@
+{
+  "exp-audit-db-loss": { "detected": true, "verdict": "degraded" },
+  "exp-auth-latency": { "detected": false, "verdict": "violated" },
+  "exp-cert-revocation": { "detected": true, "verdict": "held" },
+  "exp-iam-escalation": { "detected": true, "verdict": "held" },
+  "exp-key-rotation": { "detected": true, "verdict": "held" },
+  "exp-log-saturation": { "detected": true, "verdict": "degraded" },
+  "exp-response-corruption": { "detected": true, "verdict": "held" },
+  "exp-siem-outage": { "detected": true, "verdict": "degraded" },
+  "exp-token-expiry": { "detected": true, "verdict": "held" },
+  "exp-waf-disabled": { "detected": true, "verdict": "held" }
+}

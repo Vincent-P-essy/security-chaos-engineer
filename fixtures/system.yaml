@@ -1,0 +1,73 @@
+# Reference target stack for security chaos experiments. Everything here is a
+# synthetic testbed used to exercise the experiment engine; it is not a real
+# system inventory. Component `fails_closed` and control `reliable` flags are the
+# knobs that decide whether an injected fault is absorbed safely.
+name: reference-stack
+
+pipeline:
+  capacity: 8
+  description: Bounded alert path to the SIEM; excess alerts are dropped.
+
+components:
+  - { id: tls_gateway, description: Edge TLS termination, fails_closed: true }
+  - { id: auth_service, description: Token issuance and verification, fails_closed: true }
+  - { id: api_backend, description: Business API, fails_closed: true }
+  - { id: siem, description: Security information and event management, fails_closed: true }
+  - { id: audit_db, description: Append-only audit store, fails_closed: false }
+  - { id: log_pipeline, description: Log shipping and enrichment, fails_closed: true }
+  - { id: kms, description: Key management service, fails_closed: true }
+  - { id: waf, description: Web application firewall, fails_closed: true }
+  - { id: iam, description: Identity and access management, fails_closed: true }
+
+controls:
+  - id: cert_monitor
+    kind: detect
+    covers: [cert_revocation]
+    detection_latency_ticks: 1
+    description: Watches certificate validity and revocation.
+  - id: auth_monitor
+    kind: detect
+    covers: [token_expiry]
+    detection_latency_ticks: 1
+    description: Flags mass token invalidation and auth failures.
+  - id: integrity_check
+    kind: detect
+    covers: [response_corruption]
+    detection_latency_ticks: 2
+    description: Verifies response signatures and schema.
+  - id: latency_slo
+    kind: detect
+    covers: [auth_latency]
+    detection_latency_ticks: 3
+    reliable: false
+    description: SLO alarm on auth latency (present but not wired to paging).
+  - id: siem_heartbeat
+    kind: detect
+    covers: [siem_outage]
+    detection_latency_ticks: 2
+    description: Heartbeat that detects SIEM unavailability.
+  - id: kms_monitor
+    kind: detect
+    covers: [key_rotation]
+    detection_latency_ticks: 1
+    description: Tracks key versions and unexpected rotation.
+  - id: audit_monitor
+    kind: detect
+    covers: [audit_db_loss]
+    detection_latency_ticks: 1
+    description: Detects loss of the audit database connection.
+  - id: log_monitor
+    kind: detect
+    covers: [log_saturation]
+    detection_latency_ticks: 2
+    description: Detects log pipeline back-pressure and drops.
+  - id: config_drift
+    kind: detect
+    covers: [waf_rule_disabled]
+    detection_latency_ticks: 2
+    description: Detects drift from the approved WAF ruleset.
+  - id: iam_analyzer
+    kind: detect
+    covers: [iam_privilege_escalation]
+    detection_latency_ticks: 1
+    description: Flags unexpected privilege grants.
