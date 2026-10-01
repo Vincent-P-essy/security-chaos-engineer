@@ -22,6 +22,12 @@ regression suite. It runs entirely against a simulated target — it injects
 nothing into any real service — and is a portfolio-grade prototype, not a
 production chaos platform.
 
+## Running example
+
+![security-chaos-engineer running locally](docs/screenshots/application.png)
+
+Detection and resilience results from the bundled chaos experiments. These scores describe the simulated system. [Commands and test results](docs/verification.md).
+
 ## Measured evidence
 
 | Measurement | Reviewed result | Scope |
